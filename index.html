@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="検索エンジンでクラウドワークスとランサーズの案件候補を探すアプリ" />
+  <title>あなたにピッタリな、AI活用できる仕事を探そう！</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;600;700&family=Outfit:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="#">Work<span>Compass</span></a>
+    <span class="privacy"><i></i> プロフィールはこのブラウザに保存</span>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div>
+        <p class="eyebrow">あなたらしく働ける案件を、もっと近くに。</p>
+        <h1>あなたにピッタリな、<br><em>AI活用できる仕事</em>を<br>探そう！</h1>
+        <p class="lead">経験・希望から検索語をつくり、Googleでクラウドワークスとランサーズの案件候補を探します。</p>
+      </div>
+      <div class="hero-visual" aria-hidden="true">
+        <div class="orbit orbit-a"></div><div class="orbit orbit-b"></div>
+        <div class="compass">✦</div>
+        <span class="tag t1">ライティング</span><span class="tag t2">在宅</span><span class="tag t3">週10時間</span>
+      </div>
+    </section>
+
+    <nav class="steps" aria-label="入力ステップ">
+      <button class="step active" data-step="1"><b>1</b><span>スキル</span></button>
+      <span class="line"></span>
+      <button class="step" data-step="2"><b>2</b><span>希望条件</span></button>
+      <span class="line"></span>
+      <button class="step" data-step="3"><b>3</b><span>検索・診断</span></button>
+    </nav>
+
+    <form id="profileForm" class="panel">
+      <section class="form-step active" data-panel="1">
+        <div class="panel-heading"><span>01</span><div><h2>得意なことを教えてください</h2><p>案件に使いたいスキルを、自由に追加できます。</p></div></div>
+        <label class="field-label" for="skillInput">スキル・経験</label>
+        <div class="tag-input"><input id="skillInput" placeholder="例：AI活用、ChatGPT、Codex、Claude Code" /><button type="button" id="addSkill">追加</button></div>
+        <div id="skills" class="chips"></div>
+        <p class="suggest-label">よく使われるスキル</p>
+        <div id="suggestions" class="suggestions"></div>
+        <label class="field-label" for="experience">経験・アピールポイント <small>任意</small></label>
+        <textarea id="experience" rows="4" placeholder="例：ブログ記事を2年間執筆。SEOの基本知識があり、納期を守って丁寧に対応できます。"></textarea>
+        <div class="actions end"><button type="button" class="primary next" data-next="2">希望条件へ <span>→</span></button></div>
+      </section>
+
+      <section class="form-step" data-panel="2">
+        <div class="panel-heading"><span>02</span><div><h2>希望する働き方を選びましょう</h2><p>仕事タイプ・スキル・重視することを検索語に反映します。報酬と作業時間は案件を確認するときの目安です。</p></div></div>
+        <div class="grid two">
+          <label>希望の仕事タイプ<select id="jobType"><option value="">こだわらない</option><option>ライティング</option><option>データ入力</option><option>事務・アシスタント</option><option>デザイン</option><option>Web制作</option><option>動画編集</option><option>SNS運用</option><option>翻訳</option></select></label>
+          <label>契約形式<select id="contract"><option value="">こだわらない</option><option>固定報酬</option><option>時間単価</option><option>タスク</option></select></label>
+          <label>最低希望報酬（円）<input id="minBudget" inputmode="numeric" type="number" min="0" step="1000" placeholder="例：10000" /></label>
+          <label>週に使える時間<select id="hours"><option value="">こだわらない</option><option>週5時間以内</option><option>週10時間以内</option><option>週20時間以内</option><option>週30時間以上</option></select></label>
+        </div>
+        <fieldset><legend>重視すること</legend><div class="checks">
+          <label><input type="checkbox" name="priority" value="初心者歓迎"><span>初心者歓迎</span></label>
+          <label><input type="checkbox" name="priority" value="継続依頼"><span>継続依頼</span></label>
+          <label><input type="checkbox" name="priority" value="完全在宅"><span>完全在宅</span></label>
+          <label><input type="checkbox" name="priority" value="スキマ時間"><span>スキマ時間</span></label>
+        </div></fieldset>
+        <div class="actions"><button type="button" class="secondary prev" data-next="1">← 戻る</button><button type="button" class="primary next" data-next="3">検索へ <span>→</span></button></div>
+      </section>
+
+      <section class="form-step" data-panel="3">
+        <div class="panel-heading"><span>03</span><div><h2>あなた向けの検索条件です</h2><p>検索語を編集して、検索エンジンの結果ページを開きます。</p></div></div>
+        <div class="search-box"><div><label for="searchQuery">検索キーワード</label><input id="searchQuery" /></div><button type="button" id="openSearch">候補を検索 ↗</button></div>
+        <div class="grid two search-options">
+          <label>対象サイト<select id="searchSite"><option value="both">両方のサイト</option><option value="crowdworks">クラウドワークス</option><option value="lancers">ランサーズ</option></select></label>
+          <label>検索期間（Google）<select id="searchPeriod"><option value="d">24時間以内</option><option value="w" selected>1週間以内</option><option value="m">1か月以内</option><option value="">期間指定なし</option></select></label>
+          <label>表示順（Google）<select id="searchOrder"><option value="date">日付が新しい順を指定</option><option value="relevance">関連度順</option></select></label>
+        </div>
+        <p class="helper">Googleの初期設定は「1週間以内・日付が新しい順」です。検索エンジンが認識する日付で絞るため、案件の掲載日順や募集中であることは保証できません。結果が少ない場合は期間を広げ、検索語を1〜2個に減らしてください。</p>
+        <p class="helper">検索結果は別タブに表示されます。すべての案件が見つかるとは限りません。募集終了の案件も含まれるため、最新の条件・募集状況は掲載元で確認してください。</p>
+        <details><summary>実際に使う検索式</summary><p id="queryPreview" class="helper"></p></details>
+        <div id="profileSummary" class="summary"></div>
+        <div class="divider"><span>候補案件の相性をチェック</span></div>
+        <p class="helper">見つけた案件のタイトルと説明文を貼り付けてください。本文が取得できない場合は、ご自身で確認した内容を入力できます。</p>
+        <textarea id="jobText" rows="7" placeholder="案件のタイトル・仕事内容をここに貼り付け…"></textarea>
+        <button type="button" id="scoreJob" class="score-btn">この案件との相性を診断</button>
+        <div id="scoreResult" class="score-result" hidden></div>
+        <div class="divider"><span>気になる案件を保存</span></div>
+        <label class="field-label" for="candidateTitle">案件名</label><input id="candidateTitle" placeholder="例：記事作成のお仕事" />
+        <label class="field-label" for="candidateUrl">掲載元のURL</label><input id="candidateUrl" type="url" placeholder="https://crowdworks.jp/public/jobs/… または https://www.lancers.jp/work/detail/…" />
+        <button type="button" id="saveCandidate" class="score-btn">案件を保存</button>
+        <p class="helper">募集終了と確認できた案件は、保存一覧の「募集終了・不要な案件を削除」で取り除けます。募集状況の自動判定は行いません。</p>
+        <p id="candidateStatus" role="status" class="helper"></p><div id="candidateList"></div>
+        <div class="actions"><button type="button" class="secondary prev" data-next="2">← 条件を修正</button><button type="button" id="resetAll" class="text-btn">プロフィールをリセット</button></div>
+      </section>
+    </form>
+  </main>
+  <footer>Work Compass <span>•</span> クラウドワークス・ランサーズ非公式ツール</footer>
+  <script src="app.js"></script>
+</body>
+</html>
